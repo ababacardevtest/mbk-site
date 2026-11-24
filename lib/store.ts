@@ -32,7 +32,7 @@ export async function saveContent(c: Content) {
   const body = JSON.stringify(c, null, 2);
   if (useBlob) {
     const { put } = await import('@vercel/blob');
-    await put('content.json', body, { access: 'public', addRandomSuffix: false, allowOverwrite: true, contentType: 'application/json' });
+    await put('content.json', body, { access: 'public', addRandomSuffix: false, contentType: 'application/json' });
     return;
   }
   await fs.mkdir(DATA, { recursive: true });
