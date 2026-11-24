@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { background: #FBFAF4; color: #2A2A22; -webkit-tap-highlight-color: transparent; }
+:focus-visible { outline: 3px solid #E8B53A; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+.field { @apply w-full rounded-xl border border-forest/20 bg-white px-4 py-3 text-base outline-none focus:border-forest; }
