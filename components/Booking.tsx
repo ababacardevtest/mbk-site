@@ -75,14 +75,38 @@ export default function Booking({ content }: { content: Content }) {
 
         <div>
           <h3 className="font-display text-2xl font-bold text-forest">Vos informations</h3>
-          <div className="mt-4 space-y-3">
-            <input className="field" placeholder="Votre nom" autoComplete="name" value={f.name} onChange={up('name')} />
-            <input className="field" placeholder="Adresse / quartier" autoComplete="street-address" value={f.address} onChange={up('address')} />
-            <div className="grid grid-cols-2 gap-3">
-              <input className="field" type="date" min={today} value={f.date} onChange={up('date')} aria-label="Date souhaitée" />
-              <input className="field" type="time" value={f.time} onChange={up('time')} aria-label="Heure souhaitée" />
+          <div className="mt-4 space-y-4">
+            <div>
+              <label htmlFor="bk-name" className="mb-1.5 block text-sm font-semibold text-bark">
+                Votre nom <span className="text-red-700" aria-hidden>*</span>
+              </label>
+              <input id="bk-name" className="field" placeholder="Ex : Awa Diop" autoComplete="name" required value={f.name} onChange={up('name')} />
             </div>
-            <textarea className="field" rows={2} placeholder="Précisions (facultatif)" value={f.notes} onChange={up('notes')} />
+
+            <div>
+              <label htmlFor="bk-address" className="mb-1.5 block text-sm font-semibold text-bark">
+                Adresse / quartier <span className="text-red-700" aria-hidden>*</span>
+              </label>
+              <input id="bk-address" className="field" placeholder="Ex : Pikine, Icotaf, près de la mosquée" autoComplete="street-address" required value={f.address} onChange={up('address')} />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="bk-date" className="mb-1.5 block text-sm font-semibold text-bark">Date souhaitée</label>
+                <input id="bk-date" className="field" type="date" min={today} value={f.date} onChange={up('date')} />
+              </div>
+              <div>
+                <label htmlFor="bk-time" className="mb-1.5 block text-sm font-semibold text-bark">Heure souhaitée</label>
+                <input id="bk-time" className="field" type="time" value={f.time} onChange={up('time')} />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="bk-notes" className="mb-1.5 block text-sm font-semibold text-bark">
+                Précisions <span className="font-normal text-bark/60">(facultatif)</span>
+              </label>
+              <textarea id="bk-notes" className="field" rows={2} placeholder="Ex : étage, point de repère, demande particulière" value={f.notes} onChange={up('notes')} />
+            </div>
           </div>
         </div>
       </div>
