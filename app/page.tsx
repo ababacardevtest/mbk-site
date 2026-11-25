@@ -55,17 +55,36 @@ export default async function Home() {
 
       <footer className="bg-forest text-white">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-10 text-center">
-          <img src={b.logo || '/logo.png'} alt="" className="h-14 w-auto rounded-2xl bg-white px-3 py-2" />
+          <img src={b.logo || '/logo.png'} alt="" className="h-14 w-auto rounded-2xl px-3 py-2" />
           <p className="font-display text-2xl font-black">{b.name}</p>
-          <a href={`tel:+${b.whatsapp}`} className="text-xl font-bold text-sun">{b.phoneDisplay}</a>
+          <a
+            href={`tel:+${b.whatsapp}`}
+            aria-label={`Appeler le ${b.phoneDisplay}`}
+            className="inline-flex items-center gap-2.5 rounded-full px-3 py-2 text-xl font-bold text-sun active:scale-95"
+          >
+            <svg viewBox="0 0 24 24" className="h-6 w-6 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.800.6 2.800.7a2 2 0 0 1 1.700 2Z" />
+            </svg>
+            {b.phoneDisplay}
+          </a>
           <p className="text-sm text-white/70">{b.tagline}</p>
           <InstallButton label="Installer l’application" className="mt-3 rounded-full bg-sun px-6 py-3 font-bold text-bark" />
         </div>
+<<<<<<< HEAD
         <div className="mt-24 border-t border-slate-200 py-8">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-sm text-slate-500 sm:flex-row">
             <p>© {new Date().getFullYear()} Omega Digital Services - ODS . Tous droits réservés.</p>
           </div>
         </div>
+=======
+       
+        <div className="mt-24 border-t border-slate-200 py-8">
+          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-sm text-white sm:flex-row text-center">
+            <p>© {new Date().getFullYear()} Omega Digital Services - ODS . Tous droits réservés.</p>
+          </div>
+        </div>
+
+>>>>>>> 0c7ec46 (feat: add loader)
       </footer>
 
       <a href={wa} aria-label="Nous écrire sur WhatsApp" className="fixed bottom-24 right-4 z-20 hidden h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg md:grid">

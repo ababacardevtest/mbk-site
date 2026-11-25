@@ -2,6 +2,7 @@
 import { useEffect, useState, type ReactNode, type ChangeEvent } from 'react';
 import type { Business, Content } from '@/lib/types';
 import InstallButton from '@/components/InstallButton';
+import Loader, { Spinner } from '../loader';
 
 type FieldProps = { label: string; value: string | number; onChange: (v: string) => void; area?: boolean; type?: string };
 
@@ -39,7 +40,7 @@ function ImageField({ label, value, onChange, pw }: ImageProps) {
       <div className="flex items-center gap-3">
         {value ? <img src={value} alt="" className="h-20 w-20 rounded-xl object-cover" /> : <div className="grid h-20 w-20 place-items-center rounded-xl bg-mist text-xs text-bark/60">Aucune</div>}
         <label className="cursor-pointer rounded-full bg-forest px-4 py-2.5 text-sm font-semibold text-white">
-          {busy ? 'Envoi…' : value ? 'Changer la photo' : 'Ajouter une photo'}
+          {busy ? <span className="flex items-center gap-2"><Spinner className="h-4 w-4" /> Envoi…</span> : value ? 'Changer la photo' : 'Ajouter une photo'}
           <input type="file" accept="image/*" className="hidden" onChange={pick} />
         </label>
         {value && <button type="button" onClick={() => onChange('')} className="text-sm text-red-700 underline">Retirer</button>}
@@ -67,13 +68,20 @@ export default function Admin() {
   const [np, setNp] = useState('');
   const [np2, setNp2] = useState('');
   const [pmsg, setPmsg] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   async function login(p: string) {
-    const r = await fetch('/api/auth', { headers: { 'x-admin-password': p } });
-    if (!r.ok) { setMsg('Mot de passe incorrect'); return; }
-    sessionStorage.setItem('pw', p);
-    setC(await (await fetch('/api/content', { cache: 'no-store' })).json());
-    setOk(true); setMsg('');
+    setLoading(true);
+    try {
+      const r = await fetch('/api/auth', { headers: { 'x-admin-password': p } });
+      if (!r.ok) { setMsg('Mot de passe incorrect'); return; }
+      sessionStorage.setItem('pw', p);
+      setC(await (await fetch('/api/content', { cache: 'no-store' })).json());
+      setOk(true); setMsg('');
+    } finally {
+      setLoading(false);
+    }
   }
   useEffect(() => { const p = sessionStorage.getItem('pw'); if (p) { setPw(p); login(p); } }, []);
 
@@ -96,6 +104,8 @@ export default function Admin() {
     if (r.ok) { sessionStorage.setItem('pw', np); setPw(np); setNp(''); setNp2(''); setPmsg('✓ Code changé. Utilisez-le à la prochaine connexion.'); }
     else setPmsg((await r.json()).error || 'Erreur');
   }
+
+  if (loading) return <Loader label="Chargement de votre espace…" />;
 
   if (!ok || !c) {
     return (
@@ -170,7 +180,9 @@ export default function Admin() {
       <div className="fixed inset-x-0 bottom-0 border-t bg-white/95 p-3 backdrop-blur">
         <div className="mx-auto flex max-w-3xl items-center justify-between gap-3">
           <p className="text-sm text-bark">{msg}</p>
-          <button onClick={save} className="rounded-full bg-forest px-7 py-3.5 font-bold text-white">Enregistrer</button>
+          <button onClick={save} disabled={saving} className="flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 font-bold text-white disabled:opacity-70">
+            {saving && <Spinner />} {saving ? 'Enregistrement…' : 'Enregistrer'}
+          </button>
         </div>
       </div>
     </main>
