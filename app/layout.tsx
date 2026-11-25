@@ -1,4 +1,3 @@
-// @ts-expect-error Global CSS is handled by Next.js; TypeScript may not resolve it here.
 import './globals.css';
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
