@@ -70,21 +70,12 @@ export default async function Home() {
           <p className="text-sm text-white/70">{b.tagline}</p>
           <InstallButton label="Installer l’application" className="mt-3 rounded-full bg-sun px-6 py-3 font-bold text-bark" />
         </div>
-<<<<<<< HEAD
-        <div className="mt-24 border-t border-slate-200 py-8">
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-sm text-slate-500 sm:flex-row">
-            <p>© {new Date().getFullYear()} Omega Digital Services - ODS . Tous droits réservés.</p>
-          </div>
-        </div>
-=======
        
         <div className="mt-24 border-t border-slate-200 py-8">
           <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 text-sm text-white sm:flex-row text-center">
             <p>© {new Date().getFullYear()} Omega Digital Services - ODS . Tous droits réservés.</p>
           </div>
         </div>
-
->>>>>>> 0c7ec46 (feat: add loader)
       </footer>
 
       <a href={wa} aria-label="Nous écrire sur WhatsApp" className="fixed bottom-24 right-4 z-20 hidden h-12 w-12 place-items-center rounded-full bg-[#25D366] text-white shadow-lg md:grid">
